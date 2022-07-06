@@ -10,9 +10,18 @@ public class SingleLinkedList {
         link1.add(hero1);
         link1.add(hero2);
         link1.add(hero3);
+        System.out.println("The list is: ");
         link1.show();
-    }
 
+//        System.out.println("---------------");
+//        System.out.println("Deleted linked list:");
+//        link1.delete(2);
+//        link1.show();
+
+        System.out.println("---------------");
+        System.out.println("find the node:");
+        System.out.println(link1.find(1));
+    }
 }
 
 class DemoSingleLinkedListNoHead {
@@ -35,6 +44,42 @@ class DemoSingleLinkedListNoHead {
         temp.next = node;
     }
 
+//    Delete node：
+//    link the previous node to the next node of selected node, then the selected node will be deleted.
+    public void delete(int index){
+//        because the head node should not be moved, so a temp node is needed here
+        HeroNode temp = head;
+        while(true){
+            if(temp.next == null){
+                System.out.println("node not found");
+                break;
+            }
+            if(temp.next.no == index){
+                temp.next = temp.next.next;
+                break;
+            }
+            temp = temp.next;
+        }
+    }
+
+//  find the node
+//    just like delete node, there should be a temp node because head should not be moved.
+    public HeroNode find(int index){
+        HeroNode targetNode= null;
+        HeroNode temp = head;
+        while(true){
+            if(temp.next == null){
+                System.out.println("node not exit");
+                break;
+            }
+            if(temp.next.no == index){
+                targetNode = temp.next;
+                break;
+            }
+            temp = temp.next;
+        }
+        return targetNode;
+    }
 //  show all the list node;
     public void show(){
 //        Head should not be moved, so use a temp node as pointer;
@@ -56,7 +101,7 @@ class DemoSingleLinkedListNoHead {
 }
 
 class HeroNode {
-    private int no;
+    public int no;
     HeroNode next = null;
 
     public HeroNode(int rank) {
